@@ -24,12 +24,18 @@ class Cube:
         m_model = glm.rotate(self.m_model, self.app.time * 0.3, glm.vec3(0, 1, 0))
         self.shader_program['m_model'].write(m_model)
         self.shader_program['m_view'].write(self.app.camera.m_view)
+        self.shader_program['camPos'].write(self.app.camera.position)
 
     def get_model_matrix(self):
         m_model = glm.mat4()
         return m_model
 
     def on_init(self):
+        # Iluminação
+        self.shader_program['light.position'].write(self.app.light.position)
+        self.shader_program['light.Ia'].write(self.app.light.Ia)
+        self.shader_program['light.Id'].write(self.app.light.Id)
+        self.shader_program['light.Is'].write(self.app.light.Is)
         # Textura
         self.shader_program['u_texture_0'] = 0
         self.texture.use()
@@ -48,7 +54,7 @@ class Cube:
 
     def get_vao(self):
         vao = self.ctx.vertex_array(self.shader_program,
-                                    [(self.vbo, '2f 3f', 'in_textcoord_0', 'in_position')])
+                                    [(self.vbo, '2f 3f 3f', 'in_textcoord_0', 'in_normal', 'in_position')])
         return vao
 
     def get_vertex_data(self):
@@ -73,6 +79,15 @@ class Cube:
                               (3, 1, 2), (3, 0, 1),]
         text_coord_data = self.get_data(text_coord, text_coord_indices)
 
+        normais = [( 0,  0,  1) * 6,
+                   ( 1,  0,  0) * 6,
+                   ( 0,  0, -1) * 6,
+                   (-1,  0,  0) * 6,
+                   ( 0,  1,  0) * 6,
+                   ( 0, -1,  0) * 6,]
+        normais = np.array(normais, dtype='f4').reshape(36, 3)
+
+        vertex_data = np.hstack([normais, vertex_data])
         vertex_data = np.hstack([text_coord_data, vertex_data])
 
         return vertex_data

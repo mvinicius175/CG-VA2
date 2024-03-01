@@ -3,6 +3,7 @@ import moderngl as mgl
 import sys
 from model import *
 from camera import Camera
+from light import Light
 
 
 class GraphicsEngine:
@@ -27,6 +28,8 @@ class GraphicsEngine:
         self.clock = pg.time.Clock()
         self.time = 0
         self.delta_time = 0
+        # Iluminação
+        self.light = Light()
         # Camera
         self.camera = Camera(self)
         # rendering um objeto
