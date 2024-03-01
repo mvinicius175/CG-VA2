@@ -18,6 +18,14 @@ class BaseModel:
 
     def get_model_matrix(self):
         m_model = glm.mat4()
+        # translação
+        m_model = glm.translate(m_model, self.pos)
+        # rotação
+        m_model = glm.rotate(m_model, self.rot.z, glm.vec3(0, 0, 1))
+        m_model = glm.rotate(m_model, self.rot.y, glm.vec3(0, 1, 0))
+        m_model = glm.rotate(m_model, self.rot.x, glm.vec3(1, 0, 0))
+        # escala
+        m_model = glm.scale(m_model, self.scale)
         return m_model
 
     def render(self):
