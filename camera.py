@@ -46,8 +46,18 @@ class Camera:
         self.m_view = self.get_view_matrix()
 
     def move(self):
+        APPROACH_LIMIT = 3.0
         velocity = SPEED * self.app.delta_time
         keys = pg.key.get_pressed()
+
+        for obj in self.app.scene.objects:
+            # Calcular a distância entre a câmera e o objeto
+            distance = glm.length(self.position - obj.pos)
+            if distance < APPROACH_LIMIT:
+                # A câmera está muito próxima do objeto, ajustar a posição para manter a distância mínima
+                direction = glm.normalize(self.position - obj.pos)
+                self.position += direction * (APPROACH_LIMIT - distance)
+                return # Não permitir mais movimentos neste frame
 
         if keys[pg.K_w]:
             self.position += self.forward * velocity
@@ -61,6 +71,28 @@ class Camera:
             self.position += self.up * velocity
         if keys[pg.K_e]:
             self.position -= self.up * velocity
+
+
+    # def is_colliding_with_objects(self):
+    #     for obj in self.app.scene.objects:
+    #         obj_aabb = obj.get_aabb()
+    #         camera_aabb = {
+    #             'center': self.position,
+    #             'size': glm.vec3(1, 1, 1)
+    #         }
+
+    #         if self.is_aabb_colliding(camera_aabb, obj_aabb):
+    #             return True
+    #     return False
+
+    # @staticmethod
+    # def is_aabb_colliding(aabb1, aabb2):
+    #     # Verifica se duas AABBs estão colidindo
+    #     return (
+    #         abs(aabb1['center'].x - aabb2['center'].x) < (aabb1['size'].x + aabb2['size'].x) / 2 and
+    #         abs(aabb1['center'].y - aabb2['center'].y) < (aabb1['size'].y + aabb2['size'].y) / 2 and
+    #         abs(aabb1['center'].z - aabb2['center'].z) < (aabb1['size'].z + aabb2['size'].z) / 2
+    #     )
 
     def get_view_matrix(self):
         return glm.lookAt(self.position, self.position + self.forward, self.up)

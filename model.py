@@ -35,6 +35,7 @@ class BaseModel:
 class Cube(BaseModel):
     def __init__(self, app, vao_name='cube', texture_id=0, pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
+        # self.aabb = self.get_aabb()
         self.on_init()
 
     def update(self):
@@ -57,3 +58,17 @@ class Cube(BaseModel):
         self.program['light.Ia'].write(self.app.light.Ia)
         self.program['light.Id'].write(self.app.light.Id)
         self.program['light.Is'].write(self.app.light.Is)
+
+    # def get_aabb(self):
+    #     center = glm.vec3(self.pos)
+    #     size = glm.vec3(self.scale)
+    #     return {
+    #         'center': center,
+    #         'size': size
+    #     }
+
+    # def get_aabb_corners(self):
+    #     half_size = self.aabb['size'] / 2
+    #     min_point = self.aabb['center'] - half_size
+    #     max_point = self.aabb['center'] + half_size
+    #     return min_point, max_point
