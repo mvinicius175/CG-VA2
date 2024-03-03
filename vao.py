@@ -15,6 +15,24 @@ class VAO:
             vbo = self.vbo.vbos['cube']
             )
 
+        # D-Rex VAO
+        self.vaos['d-rex'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['d-rex']
+            )
+
+        # D-Rex eyes VAO
+        self.vaos['d-rex-eyes'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['d-rex-eyes']
+            )
+
+        # Cat VAO
+        self.vaos['cat'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['cat']
+            )
+
         # Skybox-day VAO
         self.vaos['skybox-day'] = self.get_vao(
             program=self.program.programs['skybox'],

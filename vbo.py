@@ -1,5 +1,6 @@
 import numpy as np
 import moderngl as mgl
+import pywavefront
 
 class VBO:
     def __init__(self, ctx) -> None:
@@ -9,6 +10,9 @@ class VBO:
         self.vbos['skybox-night'] = SkyboxVBO(ctx)
         self.vbos['skybox-space'] = SkyboxVBO(ctx)
         self.vbos['skybox-mountain'] = SkyboxVBO(ctx)
+        self.vbos['d-rex'] = DRexVBO(ctx)
+        self.vbos['d-rex-eyes'] = DRexEyesVBO(ctx)
+        self.vbos['cat'] = Cat(ctx)
 
     def destroy(self):
         [vbo.destroy() for vbo in self.vbos.values()]
@@ -31,6 +35,44 @@ class BaseVbo:
     def destroy(self):
         self.vbo.release()
 
+class DRexVBO(BaseVbo):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.format = '2f 3f 3f'
+        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
+
+    def get_vertex_data(self):
+        objs = pywavefront.Wavefront('objects/d-rex/D_REX.obj', cache=True, parse=True)
+        obj = objs.materials['D_Rex_MAT']
+        vertex_data = obj.vertices
+        vertex_data = np.array(vertex_data, dtype='f4')
+        return vertex_data
+
+class DRexEyesVBO(BaseVbo):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.format = '2f 3f 3f'
+        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
+
+    def get_vertex_data(self):
+        objs = pywavefront.Wavefront('objects/d-rex/D_REX.obj', cache=True, parse=True)
+        obj = objs.materials['Eye_MAT']
+        vertex_data = obj.vertices
+        vertex_data = np.array(vertex_data, dtype='f4')
+        return vertex_data
+
+class Cat(BaseVbo):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.format = '2f 3f 3f'
+        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
+
+    def get_vertex_data(self):
+        objs = pywavefront.Wavefront('objects/cat/20430_Cat_v1_NEW.obj', cache=True, parse=True)
+        obj = objs.materials.popitem()[1]
+        vertex_data = obj.vertices
+        vertex_data = np.array(vertex_data, dtype='f4')
+        return vertex_data
 
 class CubeVBO(BaseVbo):
     def __init__(self, ctx) -> None:

@@ -25,6 +25,11 @@ class Scene:
             for z in range(-n, n, s):
                 add(Cube(app, texture_id=1, pos=(x, -5, z)))
 
+        add(Cat(app, pos=(0, -4, 10), rot=(-90, 0, 0)))
+        # D-Rex
+        add(DRex(app, pos=(10, -4, 10), scale=(5, 5, 5)))
+        add(DRexEyes(app, pos=(10, -4, 10), scale=(5, 5, 5)))
+
 
     def render(self):
         keys = pg.key.get_pressed()

@@ -64,6 +64,18 @@ class Cube(ExtendedBaseModel):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
         # self.aabb = self.get_aabb()
 
+class DRex(ExtendedBaseModel):
+    def __init__(self, app, vao_name='d-rex', texture_id='d-rex', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
+class DRexEyes(ExtendedBaseModel):
+    def __init__(self, app, vao_name='d-rex-eyes', texture_id='d-rex-eyes', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
+class Cat(ExtendedBaseModel):
+    def __init__(self, app, vao_name='cat', texture_id='cat', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
 class SkyBox(BaseModel):
     def __init__(self, app, vao_name, texture_id,
                  pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):

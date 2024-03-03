@@ -8,10 +8,14 @@ class Texture:
         self.textures[0] = self.get_texture(path='textures/tree_texture.png')
         self.textures[1] = self.get_texture(path='textures/grass_texture1.png')
         self.textures[2] = self.get_texture(path='textures/grass_texture2.png')
+        self.textures['cat'] = self.get_texture(path='objects/cat/20430_cat_diff_v1.jpg')
+        self.textures['d-rex'] = self.get_texture(path='objects/d-rex/d-rex-body.png')
+        self.textures['d-rex-eyes'] = self.get_texture(path='objects/d-rex/d-rex-eyes.png')
         self.textures['skybox-day'] = self.get_skybox_texture(dir_path='textures/skybox/day/', ext='png')
         self.textures['skybox-night'] = self.get_skybox_texture(dir_path='textures/skybox/night/', ext='png')
         self.textures['skybox-space'] = self.get_skybox_texture(dir_path='textures/skybox/space/', ext='png')
         self.textures['skybox-mountain'] = self.get_skybox_texture(dir_path='textures/skybox/mountain/', ext='png')
+
 
     def get_texture(self, path):
         texture = pg.image.load(path).convert()
