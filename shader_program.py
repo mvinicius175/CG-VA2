@@ -6,6 +6,7 @@ class ShaderProgram:
         self.ctx = ctx
         self.programs = {}
         self.programs['default'] = self.get_program('default')
+        self.programs['skybox'] = self.get_program('skybox')
 
     def get_program(self, shader_program_name):
         with open(f'shaders/{shader_program_name}.vert') as file:

@@ -15,6 +15,27 @@ class VAO:
             vbo = self.vbo.vbos['cube']
             )
 
+        # Skybox-day VAO
+        self.vaos['skybox-day'] = self.get_vao(
+            program=self.program.programs['skybox'],
+            vbo = self.vbo.vbos['skybox-day']
+            )
+        # Skybox-night VAO
+        self.vaos['skybox-night'] = self.get_vao(
+            program=self.program.programs['skybox'],
+            vbo = self.vbo.vbos['skybox-night']
+            )
+        # Skybox-space VAO
+        self.vaos['skybox-space'] = self.get_vao(
+            program=self.program.programs['skybox'],
+            vbo = self.vbo.vbos['skybox-space']
+            )
+        # Skybox-mountain VAO
+        self.vaos['skybox-mountain'] = self.get_vao(
+            program=self.program.programs['skybox'],
+            vbo = self.vbo.vbos['skybox-mountain']
+            )
+
 
     def get_vao(self, program, vbo):
         vao = self.ctx.vertex_array(program, [(vbo.vbo, vbo.format, *vbo.attribs)])

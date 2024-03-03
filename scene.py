@@ -6,6 +6,11 @@ class Scene:
         self.objects = []
         self.load()
 
+        # self.skyboxDay = SkyBox(app, vao_name='skybox-day', texture_id='skybox-day')
+        self.skyboxNight = SkyBox(app, vao_name='skybox-night', texture_id='skybox-night')
+        # self.skyboxSpace = SkyBox(app, vao_name='skybox-space', texture_id='skybox-space')
+        # self.skyboxMountain = SkyBox(app, vao_name='skybox-mountain', texture_id='skybox-mountain')
+
 
     def add_object(self, object):
         self.objects.append(object)
@@ -22,5 +27,10 @@ class Scene:
 
 
     def render(self):
+        keys = pg.key.get_pressed()
         for object in self.objects:
             object.render()
+
+        self.skyboxNight.render()
+
+

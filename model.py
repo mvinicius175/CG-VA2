@@ -32,7 +32,7 @@ class BaseModel:
         self.update()
         self.vao.render()
 
-class Cube(BaseModel):
+class ExtendedBaseModel(BaseModel):
     def __init__(self, app, vao_name='cube', texture_id=0, pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
         # self.aabb = self.get_aabb()
@@ -58,6 +58,30 @@ class Cube(BaseModel):
         self.program['light.Ia'].write(self.app.light.Ia)
         self.program['light.Id'].write(self.app.light.Id)
         self.program['light.Is'].write(self.app.light.Is)
+
+class Cube(ExtendedBaseModel):
+    def __init__(self, app, vao_name='cube', texture_id=0, pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+        # self.aabb = self.get_aabb()
+
+class SkyBox(BaseModel):
+    def __init__(self, app, vao_name, texture_id,
+                 pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+        # self.aabb = self.get_aabb()
+        self.on_init()
+
+    def on_init(self):
+        self.texture = self.app.mesh.texture.textures[self.texture_id]
+        self.program['u_texture_skybox'] = 0
+        self.texture.use(location=0)
+
+        self.program['m_proj'].write(self.camera.m_proj)
+        self.program['m_view'].write(glm.mat4(glm.mat3(self.camera.m_view)))
+
+    def update(self):
+        self.program['m_view'].write(glm.mat4(glm.mat3(self.camera.m_view)))
+
 
     # def get_aabb(self):
     #     center = glm.vec3(self.pos)
