@@ -56,7 +56,8 @@ class Camera:
             if distance < APPROACH_LIMIT:
                 # A câmera está muito próxima do objeto, ajustar a posição para manter a distância mínima
                 direction = glm.normalize(self.position - obj.pos)
-                self.position += direction * (APPROACH_LIMIT - distance)
+                # Esta constante 0.001 é só um valor insignificante, mas que evita o bug de quando tentava se aproximar de um objeto por baixo ou pelo lado a camera parava e se mover no espaço
+                self.position += direction * (APPROACH_LIMIT - distance + 0.0001)
                 return # Não permitir mais movimentos neste frame
 
         if keys[pg.K_w]:
