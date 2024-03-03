@@ -1,0 +1,39 @@
+{
+  "created_at": "2024-03-03T13:31:39.697203",
+  "version": "0.1",
+  "mtllibs": [
+    "Wolf_One_obj.mtl"
+  ],
+  "vertex_buffers": [
+    {
+      "material": "Wolf_Body",
+      "vertex_format": "T2F_N3F_V3F",
+      "byte_offset": 0,
+      "byte_length": 170112
+    },
+    {
+      "material": "Wolf_Claws",
+      "vertex_format": "T2F_N3F_V3F",
+      "byte_offset": 170112,
+      "byte_length": 6144
+    },
+    {
+      "material": "Wolf_Eyes",
+      "vertex_format": "T2F_N3F_V3F",
+      "byte_offset": 176256,
+      "byte_length": 13824
+    },
+    {
+      "material": "Wolf_Fur",
+      "vertex_format": "T2F_N3F_V3F",
+      "byte_offset": 190080,
+      "byte_length": 17280
+    },
+    {
+      "material": "Wolf_Teeth",
+      "vertex_format": "T2F_N3F_V3F",
+      "byte_offset": 207360,
+      "byte_length": 57216
+    }
+  ]
+}

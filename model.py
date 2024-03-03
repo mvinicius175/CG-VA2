@@ -64,12 +64,31 @@ class Cube(ExtendedBaseModel):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
         # self.aabb = self.get_aabb()
 
+#! D-Rex
 class DRex(ExtendedBaseModel):
     def __init__(self, app, vao_name='d-rex', texture_id='d-rex', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
-
 class DRexEyes(ExtendedBaseModel):
     def __init__(self, app, vao_name='d-rex-eyes', texture_id='d-rex-eyes', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
+#! Wolf
+class WolfBody(ExtendedBaseModel):
+    def __init__(self, app, vao_name='wolf-body', texture_id='wolf-body', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+class WolfClaws(ExtendedBaseModel):
+    def __init__(self, app, vao_name='wolf-claws', texture_id='wolf-body', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+class WolfEyes(ExtendedBaseModel):
+    def __init__(self, app, vao_name='wolf-eyes', texture_id='wolf-eyes', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+class WolfFur(ExtendedBaseModel):
+    def __init__(self, app, vao_name='wolf-fur', texture_id='wolf-fur', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
+#! Trees
+class Tree1(ExtendedBaseModel):
+    def __init__(self, app, vao_name='tree-1', texture_id='tree-1', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
 
 class Cat(ExtendedBaseModel):

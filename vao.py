@@ -9,31 +9,53 @@ class VAO:
         self.program = ShaderProgram(ctx)
         self.vaos = {}
 
-        # Cube VAO
+        #! Cube VAO
         self.vaos['cube'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['cube']
             )
 
-        # D-Rex VAO
+        #! D-Rex VAO
         self.vaos['d-rex'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['d-rex']
             )
-
-        # D-Rex eyes VAO
         self.vaos['d-rex-eyes'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['d-rex-eyes']
             )
 
-        # Cat VAO
+        #! Cat VAO
         self.vaos['cat'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['cat']
             )
 
-        # Skybox-day VAO
+        #! Wolf VAO
+        self.vaos['wolf-body'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-body']
+            )
+        self.vaos['wolf-claws'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-claws']
+            )
+        self.vaos['wolf-eyes'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-eyes']
+            )
+        self.vaos['wolf-fur'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-fur']
+            )
+
+        #! Trees VAO
+        self.vaos['tree-1'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['tree-1']
+            )
+
+        #! Skybox-day VAO
         self.vaos['skybox-day'] = self.get_vao(
             program=self.program.programs['skybox'],
             vbo = self.vbo.vbos['skybox-day']
