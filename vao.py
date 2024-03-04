@@ -48,11 +48,21 @@ class VAO:
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['wolf-fur']
             )
+        self.vaos['wolf-teeth'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-teeth']
+            )
 
         #! Trees VAO
         self.vaos['tree-1'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['tree-1']
+            )
+
+        #! Moon VAO
+        self.vaos['moon'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['moon']
             )
 
         #! Skybox-day VAO

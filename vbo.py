@@ -17,7 +17,9 @@ class VBO:
         self.vbos['wolf-claws'] = WolfClaws(ctx)
         self.vbos['wolf-eyes'] = WolfEyes(ctx)
         self.vbos['wolf-fur'] = WolfFur(ctx)
+        self.vbos['wolf-teeth'] = WolfTeeth(ctx)
         self.vbos['tree-1'] = Tree1(ctx)
+        self.vbos['moon'] = Moon(ctx)
 
 
 
@@ -122,6 +124,19 @@ class WolfFur(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
+class WolfTeeth(BaseVbo):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.format = '2f 3f 3f'
+        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
+
+    def get_vertex_data(self):
+        objs = pywavefront.Wavefront('objects/wolf/Wolf_One_obj.obj', cache=True, parse=True)
+        obj = objs.materials['Wolf_Teeth']
+        vertex_data = obj.vertices
+        vertex_data = np.array(vertex_data, dtype='f4')
+        return vertex_data
+
 #! Trees
 class Tree1(BaseVbo):
     def __init__(self, ctx):
@@ -131,6 +146,20 @@ class Tree1(BaseVbo):
 
     def get_vertex_data(self):
         objs = pywavefront.Wavefront('objects/trees/tree_bonus.obj', cache=True, parse=True)
+        obj = objs.materials.popitem()[1]
+        vertex_data = obj.vertices
+        vertex_data = np.array(vertex_data, dtype='f4')
+        return vertex_data
+
+#! Moon
+class Moon(BaseVbo):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.format = '2f 3f 3f'
+        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
+
+    def get_vertex_data(self):
+        objs = pywavefront.Wavefront('objects/moon/moon 2k.obj', cache=True, parse=True)
         obj = objs.materials.popitem()[1]
         vertex_data = obj.vertices
         vertex_data = np.array(vertex_data, dtype='f4')
@@ -150,7 +179,6 @@ class Cat(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-#! Cat
 class CubeVBO(BaseVbo):
     def __init__(self, ctx) -> None:
         super().__init__(ctx)

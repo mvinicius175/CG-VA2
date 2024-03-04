@@ -9,7 +9,7 @@ from scene import Scene
 
 
 class GraphicsEngine:
-    def __init__(self, win_size=(900, 600)):
+    def __init__(self, win_size=(1200, 700)):
 
         pg.init()
 

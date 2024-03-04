@@ -85,10 +85,18 @@ class WolfEyes(ExtendedBaseModel):
 class WolfFur(ExtendedBaseModel):
     def __init__(self, app, vao_name='wolf-fur', texture_id='wolf-fur', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
+class WolfTeeth(ExtendedBaseModel):
+    def __init__(self, app, vao_name='wolf-teeth', texture_id='wolf-teeth', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
 
 #! Trees
 class Tree1(ExtendedBaseModel):
     def __init__(self, app, vao_name='tree-1', texture_id='tree-1', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
+#! Moon
+class Moon(ExtendedBaseModel):
+    def __init__(self, app, vao_name='moon', texture_id='moon', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
 
 class Cat(ExtendedBaseModel):

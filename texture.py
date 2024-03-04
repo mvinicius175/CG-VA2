@@ -12,9 +12,13 @@ class Texture:
         self.textures['wolf-body'] = self.get_texture(path='objects/wolf/textures/Wolf_Body.jpg')
         self.textures['wolf-eyes'] = self.get_texture(path='objects/wolf/textures/Wolf_Eyes_2.jpg')
         self.textures['wolf-fur'] = self.get_texture(path='objects/wolf/textures/Wolf_Fur.png')
+        self.textures['wolf-teeth'] = self.get_texture(path='objects/wolf/textures/Wolf_Teeth.png')
         self.textures['d-rex'] = self.get_texture(path='objects/d-rex/d-rex-body.png')
         self.textures['d-rex-eyes'] = self.get_texture(path='objects/d-rex/d-rex-eyes.png')
         self.textures['tree-1'] = self.get_texture(path='objects/trees/tree_fin.png')
+        self.textures['sun'] = self.get_texture(path='objects/moon/Textures/sun.jpg')
+        self.textures['moon'] = self.get_texture(path='objects/moon/Textures/moon_diffuse.png')
+        self.textures['colors'] = self.get_texture(path='objects/moon/Textures/colors.png')
 
         self.textures['skybox-day'] = self.get_skybox_texture(dir_path='textures/skybox/day/', ext='png')
         self.textures['skybox-night'] = self.get_skybox_texture(dir_path='textures/skybox/night/', ext='png')
