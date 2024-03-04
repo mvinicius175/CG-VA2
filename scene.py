@@ -28,8 +28,8 @@ class Scene:
 
         add(Cat(app, pos=(20, -4, 10), rot=(-90, 160, 0), scale=(2, 2, 2)))
         #! D-Rex
-        add(DRex(app, pos=(15, -4, -20), scale=(10, 10, 10), rot=(0, 40, 0)))
-        add(DRexEyes(app, pos=(15, -4, -20), scale=(10, 10, 10), rot=(0, 40, 0)))
+        add(DRex(app, pos=(-15, -4, -40), scale=(10, 10, 10), rot=(0, 40, 0)))
+        add(DRexEyes(app, pos=(-15, -4, -40), scale=(10, 10, 10), rot=(0, 40, 0)))
         #################################################################################
         add(DRex(app, pos=(40, -4, -35), scale=(8, 8, 8), rot=(0, 160, 0)))
         add(DRexEyes(app, pos=(40, -4, -35), scale=(8, 8, 8), rot=(0, 160, 0)))
