@@ -28,7 +28,7 @@ vec3 getLight(vec3 color){
     // Iluminação especular
     vec3 viewDir = normalize(camPos - fragPos);
     vec3 reflectDir = reflect(-lightDir, Normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0), 32);
+    float spec = pow(max(dot(viewDir, reflectDir), 0), 12800);
     vec3 specular = spec * light.Is;
 
     return color * (ambient + diffuse + specular);
