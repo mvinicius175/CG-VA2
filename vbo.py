@@ -2,6 +2,7 @@ import numpy as np
 import moderngl as mgl
 import pywavefront
 
+
 class VBO:
     def __init__(self, ctx) -> None:
         self.vbos = {}
@@ -12,19 +13,14 @@ class VBO:
         self.vbos['skybox-mountain'] = SkyboxVBO(ctx)
         self.vbos['d-rex'] = DRexVBO(ctx)
         self.vbos['d-rex-eyes'] = DRexEyesVBO(ctx)
-        self.vbos['cat'] = Cat(ctx)
         self.vbos['wolf-body'] = WolfBody(ctx)
-        self.vbos['wolf-claws'] = WolfClaws(ctx)
         self.vbos['wolf-eyes'] = WolfEyes(ctx)
-        self.vbos['wolf-fur'] = WolfFur(ctx)
-        self.vbos['wolf-teeth'] = WolfTeeth(ctx)
         self.vbos['tree-1'] = Tree1(ctx)
         self.vbos['moon'] = Moon(ctx)
 
-
-
     def destroy(self):
         [vbo.destroy() for vbo in self.vbos.values()]
+
 
 class BaseVbo:
 
@@ -44,8 +40,8 @@ class BaseVbo:
     def destroy(self):
         self.vbo.release()
 
-#! D-Rex
-class DRexVBO(BaseVbo):
+
+class DRexVBO(BaseVbo):  # D-rex - parte 1
     def __init__(self, ctx):
         super().__init__(ctx)
         self.format = '2f 3f 3f'
@@ -58,7 +54,8 @@ class DRexVBO(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-class DRexEyesVBO(BaseVbo):
+
+class DRexEyesVBO(BaseVbo):  # D-rex - parte 2
     def __init__(self, ctx):
         super().__init__(ctx)
         self.format = '2f 3f 3f'
@@ -71,8 +68,8 @@ class DRexEyesVBO(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-#! Wolf
-class WolfBody(BaseVbo):
+
+class WolfBody(BaseVbo):  # Lobo - parte 1
     def __init__(self, ctx):
         super().__init__(ctx)
         self.format = '2f 3f 3f'
@@ -85,20 +82,8 @@ class WolfBody(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-class WolfClaws(BaseVbo):
-    def __init__(self, ctx):
-        super().__init__(ctx)
-        self.format = '2f 3f 3f'
-        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
 
-    def get_vertex_data(self):
-        objs = pywavefront.Wavefront('objects/wolf/Wolf_One_obj.obj', cache=True, parse=True)
-        obj = objs.materials['Wolf_Claws']
-        vertex_data = obj.vertices
-        vertex_data = np.array(vertex_data, dtype='f4')
-        return vertex_data
-
-class WolfEyes(BaseVbo):
+class WolfEyes(BaseVbo):  # Lobo - parte 2
     def __init__(self, ctx):
         super().__init__(ctx)
         self.format = '2f 3f 3f'
@@ -111,34 +96,8 @@ class WolfEyes(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-class WolfFur(BaseVbo):
-    def __init__(self, ctx):
-        super().__init__(ctx)
-        self.format = '2f 3f 3f'
-        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
 
-    def get_vertex_data(self):
-        objs = pywavefront.Wavefront('objects/wolf/Wolf_One_obj.obj', cache=True, parse=True)
-        obj = objs.materials['Wolf_Fur']
-        vertex_data = obj.vertices
-        vertex_data = np.array(vertex_data, dtype='f4')
-        return vertex_data
-
-class WolfTeeth(BaseVbo):
-    def __init__(self, ctx):
-        super().__init__(ctx)
-        self.format = '2f 3f 3f'
-        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
-
-    def get_vertex_data(self):
-        objs = pywavefront.Wavefront('objects/wolf/Wolf_One_obj.obj', cache=True, parse=True)
-        obj = objs.materials['Wolf_Teeth']
-        vertex_data = obj.vertices
-        vertex_data = np.array(vertex_data, dtype='f4')
-        return vertex_data
-
-#! Trees
-class Tree1(BaseVbo):
+class Tree1(BaseVbo):  # Árvore
     def __init__(self, ctx):
         super().__init__(ctx)
         self.format = '2f 3f 3f'
@@ -151,7 +110,7 @@ class Tree1(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-#! Moon
+
 class Moon(BaseVbo):
     def __init__(self, ctx):
         super().__init__(ctx)
@@ -165,19 +124,6 @@ class Moon(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
-#! Cat
-class Cat(BaseVbo):
-    def __init__(self, ctx):
-        super().__init__(ctx)
-        self.format = '2f 3f 3f'
-        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
-
-    def get_vertex_data(self):
-        objs = pywavefront.Wavefront('objects/cat/20430_Cat_v1_NEW.obj', cache=True, parse=True)
-        obj = objs.materials.popitem()[1]
-        vertex_data = obj.vertices
-        vertex_data = np.array(vertex_data, dtype='f4')
-        return vertex_data
 
 class CubeVBO(BaseVbo):
     def __init__(self, ctx) -> None:
@@ -209,7 +155,7 @@ class CubeVBO(BaseVbo):
                               (0, 1, 2), (2, 3, 0),
                               (2, 3, 0), (2, 0, 1),
                               (0, 2, 3), (0, 1, 2),
-                              (3, 1, 2), (3, 0, 1),]
+                              (3, 1, 2), (3, 0, 1)]
         text_coord_data = self.get_data(text_coord, text_coord_indices)
 
         normais = [( 0,  0,  1) * 6,
@@ -217,7 +163,7 @@ class CubeVBO(BaseVbo):
                    ( 0,  0, -1) * 6,
                    (-1,  0,  0) * 6,
                    ( 0,  1,  0) * 6,
-                   ( 0, -1,  0) * 6,]
+                   ( 0, -1,  0) * 6]
         normais = np.array(normais, dtype='f4').reshape(36, 3)
 
         vertex_data = np.hstack([normais, vertex_data])
@@ -225,7 +171,7 @@ class CubeVBO(BaseVbo):
 
         return vertex_data
 
-#! SkyBox
+
 class SkyboxVBO(BaseVbo):
     def __init__(self, ctx) -> None:
         super().__init__(ctx)

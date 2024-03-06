@@ -7,38 +7,32 @@ from light import Light
 from mesh import Mesh
 from scene import Scene
 
-
 class GraphicsEngine:
     def __init__(self, win_size=(1200, 700)):
-
         pg.init()
 
         self.WIN_SIZE = win_size
-        # Atributos do opengl
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
-        # Cria opengl context
         pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
-        # Mouse
         pg.event.set_grab(True)
         pg.mouse.set_visible(False)
-        # Detecta e usa o contexto opengl existente
+
         self.ctx = mgl.create_context()
-        self.ctx.enable(flags=mgl.DEPTH_TEST |mgl.CULL_FACE)
-        # Cria um objeto para verificar o tempo
+        self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
+
         self.clock = pg.time.Clock()
         self.time = 0
         self.delta_time = 0
-        # Iluminação
+
         self.light = Light()
-        # Camera
         self.camera = Camera(self)
-        # mesh
         self.mesh = Mesh(self)
-        # scene
         self.scene = Scene(self)
 
+        # Variável para rastrear o tipo atual do modelo
+        self.current_model_type = 'wolf'
 
     def check_events(self):
         for event in pg.event.get():
@@ -46,6 +40,32 @@ class GraphicsEngine:
                 self.mesh.destroy()
                 pg.quit()
                 sys.exit()
+
+            if event.type == pg.KEYDOWN and event.key == pg.K_t:
+                self.toggle_model()
+
+    def toggle_model(self):
+        # Alternar entre lobo e D-rex
+        if self.current_model_type == 'wolf':  # Se já é lobo,
+            self.current_model_type = 'd-rex'  # então se torna D-rex.
+        else:
+            self.current_model_type = 'wolf'  # Se não, se torna lobo.
+
+        # Remover apenas os modelos do lobo ou D-rex, mantendo Cube e Tree1
+        self.remove_wolf_and_drex_models()
+
+        # Adicionar o modelo correspondente
+        if self.current_model_type == 'wolf':
+            self.scene.add_objects(WolfBody(self))
+            self.scene.add_objects(WolfEyes(self))
+        elif self.current_model_type == 'd-rex':
+            self.scene.add_objects(DRex(self))
+            self.scene.add_objects(DRexEyes(self))
+
+    def remove_wolf_and_drex_models(self):
+        # Filtrar os objetos da cena, removendo apenas os modelos do lobo ou D-rex
+        self.scene.objects = [obj for obj in self.scene.objects if
+        not isinstance(obj, (WolfBody, WolfEyes, DRex, DRexEyes))]
 
     def render(self):
         self.ctx.clear(color=(0.08, 0.16, 0.18))
