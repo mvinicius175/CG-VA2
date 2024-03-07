@@ -32,7 +32,7 @@ class GraphicsEngine:
         self.scene = Scene(self)
 
         # Variável para rastrear o tipo atual do modelo
-        self.current_model_type = 'wolf'
+        self.current_model_type = 'moon-diffuse'
 
     def check_events(self):
         for event in pg.event.get():
@@ -45,27 +45,25 @@ class GraphicsEngine:
                 self.toggle_model()
 
     def toggle_model(self):
-        # Alternar entre lobo e D-rex
-        if self.current_model_type == 'wolf':  # Se já é lobo,
-            self.current_model_type = 'd-rex'  # então se torna D-rex.
+        # Alternar textura da lua:
+        if self.current_model_type == 'moon-diffuse':  # Se já é 'moon-diffuse',
+            self.current_model_type = 'moon-bump'  # então se torna 'moon-bump'.
         else:
-            self.current_model_type = 'wolf'  # Se não, se torna lobo.
+            self.current_model_type = 'moon-diffuse'  # Se não, se torna 'moon-diffuse'.
 
-        # Remover apenas os modelos do lobo ou D-rex, mantendo Cube e Tree1
-        self.remove_wolf_and_drex_models()
+        # Remover apenas a lua, mantendo todos os outros objetos
+        self.remove_moondiffuse_moonbump()
 
         # Adicionar o modelo correspondente
-        if self.current_model_type == 'wolf':
-            self.scene.add_objects(WolfBody(self))
-            self.scene.add_objects(WolfEyes(self))
-        elif self.current_model_type == 'd-rex':
-            self.scene.add_objects(DRex(self))
-            self.scene.add_objects(DRexEyes(self))
+        if self.current_model_type == 'moon-diffuse':
+            self.scene.add_object(MoonDiffuse(self))
+        elif self.current_model_type == 'moon-bump':
+            self.scene.add_object(MoonBump(self))
 
-    def remove_wolf_and_drex_models(self):
-        # Filtrar os objetos da cena, removendo apenas os modelos do lobo ou D-rex
+    def remove_moondiffuse_moonbump(self):
+        # Filtrar os objetos da cena, removendo apenas os modelos de luas:
         self.scene.objects = [obj for obj in self.scene.objects if
-        not isinstance(obj, (WolfBody, WolfEyes, DRex, DRexEyes))]
+        not isinstance(obj, (MoonDiffuse, MoonBump))]
 
     def render(self):
         self.ctx.clear(color=(0.08, 0.16, 0.18))

@@ -25,15 +25,32 @@ class VAO:
             vbo = self.vbo.vbos['d-rex-eyes']
             )
 
+        #! Cat VAO
+        self.vaos['cat'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['cat']
+            )
+
         #! Wolf VAO
         self.vaos['wolf-body'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['wolf-body']
             )
-
+        self.vaos['wolf-claws'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-claws']
+            )
         self.vaos['wolf-eyes'] = self.get_vao(
             program=self.program.programs['default'],
             vbo = self.vbo.vbos['wolf-eyes']
+            )
+        self.vaos['wolf-fur'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-fur']
+            )
+        self.vaos['wolf-teeth'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo = self.vbo.vbos['wolf-teeth']
             )
 
         #! Trees VAO
@@ -43,10 +60,15 @@ class VAO:
             )
 
         #! Moon VAO
-        self.vaos['moon'] = self.get_vao(
+        self.vaos['moon-diffuse'] = self.get_vao(
             program=self.program.programs['default'],
-            vbo = self.vbo.vbos['moon']
-            )
+            vbo=self.vbo.vbos['moon-diffuse']
+        )
+
+        self.vaos['moon-bump'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo=self.vbo.vbos['moon-bump']
+        )
 
         #! Skybox-day VAO
         self.vaos['skybox-day'] = self.get_vao(
@@ -68,6 +90,7 @@ class VAO:
             program=self.program.programs['skybox'],
             vbo = self.vbo.vbos['skybox-mountain']
             )
+
 
     def get_vao(self, program, vbo):
         vao = self.ctx.vertex_array(program, [(vbo.vbo, vbo.format, *vbo.attribs)])
