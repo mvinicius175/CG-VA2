@@ -60,10 +60,15 @@ class VAO:
             )
 
         #! Moon VAO
-        self.vaos['moon'] = self.get_vao(
+        self.vaos['moon-diffuse'] = self.get_vao(
             program=self.program.programs['default'],
-            vbo = self.vbo.vbos['moon']
-            )
+            vbo=self.vbo.vbos['moon-diffuse']
+        )
+
+        self.vaos['moon-bump'] = self.get_vao(
+            program=self.program.programs['default'],
+            vbo=self.vbo.vbos['moon-bump']
+        )
 
         #! Skybox-day VAO
         self.vaos['skybox-day'] = self.get_vao(

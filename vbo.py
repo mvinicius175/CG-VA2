@@ -19,7 +19,8 @@ class VBO:
         self.vbos['wolf-fur'] = WolfFur(ctx)
         self.vbos['wolf-teeth'] = WolfTeeth(ctx)
         self.vbos['tree-1'] = Tree1(ctx)
-        self.vbos['moon'] = Moon(ctx)
+        self.vbos['moon-diffuse'] = MoonDiffuse(ctx)
+        self.vbos['moon-bump'] = MoonBump(ctx)
 
 
 
@@ -152,7 +153,7 @@ class Tree1(BaseVbo):
         return vertex_data
 
 #! Moon
-class Moon(BaseVbo):
+class MoonDiffuse(BaseVbo):
     def __init__(self, ctx):
         super().__init__(ctx)
         self.format = '2f 3f 3f'
@@ -165,6 +166,18 @@ class Moon(BaseVbo):
         vertex_data = np.array(vertex_data, dtype='f4')
         return vertex_data
 
+class MoonBump(BaseVbo):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.format = '2f 3f 3f'
+        self.attribs = ['in_textcoord_0', 'in_normal', 'in_position']
+
+    def get_vertex_data(self):
+        objs = pywavefront.Wavefront('objects/moon/moon 2k.obj', cache=True, parse=True)
+        obj = objs.materials.popitem()[1]
+        vertex_data = obj.vertices
+        vertex_data = np.array(vertex_data, dtype='f4')
+        return vertex_data
 #! Cat
 class Cat(BaseVbo):
     def __init__(self, ctx):

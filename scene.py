@@ -81,7 +81,7 @@ class Scene:
         add(Tree1(app, pos=(45, -4, 35), scale=(5, 5, 5)))
         add(Tree1(app, pos=(32, -4, 13), scale=(4, 4, 4)))
         #! Moon
-        add(Moon(app, pos=(-80, 10, 70), scale=(5, 5, 5), texture_id='moon'))
+        add(MoonDiffuse(app, pos=(-80, 10, 70), scale=(5, 5, 5), texture_id='moon-diffuse'))
 
     def render(self):
         keys = pg.key.get_pressed()
@@ -89,5 +89,4 @@ class Scene:
             object.render()
 
         self.skyboxNight.render()
-
 

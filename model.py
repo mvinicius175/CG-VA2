@@ -66,7 +66,7 @@ class Cube(ExtendedBaseModel):
 
 #! D-Rex
 class DRex(ExtendedBaseModel):
-    def __init__(self, app, vao_name='d-rex', texture_id='d-rex', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+    def __init__(self, app, vao_name='d-rex', texture_id='d-rex', pos=(-80, 10, 70),  rot=(0, 0, 0), scale=(5, 5, 5)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
 class DRexEyes(ExtendedBaseModel):
     def __init__(self, app, vao_name='d-rex-eyes', texture_id='d-rex-eyes', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
@@ -94,9 +94,13 @@ class Tree1(ExtendedBaseModel):
     def __init__(self, app, vao_name='tree-1', texture_id='tree-1', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
 
-#! Moon
-class Moon(ExtendedBaseModel):
-    def __init__(self, app, vao_name='moon', texture_id='moon', pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+#! Moons
+class MoonDiffuse(ExtendedBaseModel):
+    def __init__(self, app, vao_name='moon-diffuse', texture_id='moon-diffuse', pos=(-80, 10, 70),  rot=(0, 0, 0), scale=(5, 5, 5)):
+        super().__init__(app, vao_name, texture_id, pos, rot, scale)
+
+class MoonBump(ExtendedBaseModel):
+    def __init__(self, app, vao_name='moon-bump', texture_id='moon-bump', pos=(-80, 10, 70),  rot=(0, 0, 0), scale=(5, 5, 5)):
         super().__init__(app, vao_name, texture_id, pos, rot, scale)
 
 class Cat(ExtendedBaseModel):

@@ -7,38 +7,32 @@ from light import Light
 from mesh import Mesh
 from scene import Scene
 
-
 class GraphicsEngine:
     def __init__(self, win_size=(1200, 700)):
-
         pg.init()
 
         self.WIN_SIZE = win_size
-        # Atributos do opengl
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
-        # Cria opengl context
         pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
-        # Mouse
         pg.event.set_grab(True)
         pg.mouse.set_visible(False)
-        # Detecta e usa o contexto opengl existente
+
         self.ctx = mgl.create_context()
-        self.ctx.enable(flags=mgl.DEPTH_TEST |mgl.CULL_FACE)
-        # Cria um objeto para verificar o tempo
+        self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
+
         self.clock = pg.time.Clock()
         self.time = 0
         self.delta_time = 0
-        # Iluminação
+
         self.light = Light()
-        # Camera
         self.camera = Camera(self)
-        # mesh
         self.mesh = Mesh(self)
-        # scene
         self.scene = Scene(self)
 
+        # Variável para rastrear o tipo atual do modelo
+        self.current_model_type = 'moon-diffuse'
 
     def check_events(self):
         for event in pg.event.get():
@@ -46,6 +40,30 @@ class GraphicsEngine:
                 self.mesh.destroy()
                 pg.quit()
                 sys.exit()
+
+            if event.type == pg.KEYDOWN and event.key == pg.K_t:
+                self.toggle_model()
+
+    def toggle_model(self):
+        # Alternar textura da lua:
+        if self.current_model_type == 'moon-diffuse':  # Se já é 'moon-diffuse',
+            self.current_model_type = 'moon-bump'  # então se torna 'moon-bump'.
+        else:
+            self.current_model_type = 'moon-diffuse'  # Se não, se torna 'moon-diffuse'.
+
+        # Remover apenas a lua, mantendo todos os outros objetos
+        self.remove_moondiffuse_moonbump()
+
+        # Adicionar o modelo correspondente
+        if self.current_model_type == 'moon-diffuse':
+            self.scene.add_object(MoonDiffuse(self))
+        elif self.current_model_type == 'moon-bump':
+            self.scene.add_object(MoonBump(self))
+
+    def remove_moondiffuse_moonbump(self):
+        # Filtrar os objetos da cena, removendo apenas os modelos de luas:
+        self.scene.objects = [obj for obj in self.scene.objects if
+        not isinstance(obj, (MoonDiffuse, MoonBump))]
 
     def render(self):
         self.ctx.clear(color=(0.08, 0.16, 0.18))

@@ -17,7 +17,8 @@ class Texture:
         self.textures['d-rex-eyes'] = self.get_texture(path='objects/d-rex/d-rex-eyes.png')
         self.textures['tree-1'] = self.get_texture(path='objects/trees/tree_fin.png')
         self.textures['sun'] = self.get_texture(path='objects/moon/Textures/sun.jpg')
-        self.textures['moon'] = self.get_texture(path='objects/moon/Textures/moon_diffuse.png')
+        self.textures['moon-diffuse'] = self.get_texture(path='objects/moon/Textures/moon_diffuse.png')
+        self.textures['moon-bump'] = self.get_texture(path='objects/moon/Textures/moon_bump.png')
         self.textures['colors'] = self.get_texture(path='objects/moon/Textures/colors.png')
 
         self.textures['skybox-day'] = self.get_skybox_texture(dir_path='textures/skybox/day/', ext='png')
